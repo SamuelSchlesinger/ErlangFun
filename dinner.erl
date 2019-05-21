@@ -39,11 +39,11 @@ makeEaters(Table) ->
   makeEaters(First, Table).
 
 makeEaters(First, [Last]) ->
-  spawn(first, eater, [0, Last, First]);
+  spawn(dinner, eater, [0, Last, First]);
 makeEaters(First, [A, B | Rest]) ->
-  spawn(first, eater, [0, A, B]),
+  spawn(dinner, eater, [0, A, B]),
   makeEaters(First, [B|Rest]).
 
 eatDinner(N) ->
-  Table = [ spawn(first, fork, [I, noone]) || I <- lists:seq(1, N) ],
+  Table = [ spawn(dinner, fork, [I, noone]) || I <- lists:seq(1, N) ],
   makeEaters(Table).
